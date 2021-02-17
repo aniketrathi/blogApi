@@ -55,4 +55,41 @@ router.post("/", auth_validator.generateValidator, async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (!existingUser)
+      return res
+        .status(401)
+        .json({ errorMessage: "Wrong username or password!" });
+    const passwordCorrect = await bcrypt.compare(
+      password,
+      existingUser.passwordHash
+    );
+    if (!passwordCorrect)
+      return res
+        .status(401)
+        .json({ errorMessage: "Wrong username or password!" });
+
+    /// sign the token ///
+    const token = jwt.sign(
+      {
+        user: existingUser._id,
+      },
+      process.env.JWT_SECRET
+    );
+
+    /// send a token in a HTTP-only cookie ///
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
