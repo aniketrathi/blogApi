@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
+const authRouter = require("./routes/auth");
+
 dotenv.config();
 
 // set up server
@@ -23,3 +25,5 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/auth", authRouter);
