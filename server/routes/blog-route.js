@@ -33,4 +33,14 @@ router.post(
   }
 );
 
+router.get("/", auth.auth, async (req, res) => {
+  try {
+    const blogs = await Blog.find().populate("author");
+    res.json(blogs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
