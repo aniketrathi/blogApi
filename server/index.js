@@ -1,3 +1,4 @@
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const express = require("express");
@@ -26,6 +27,12 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  cors({
+    origin: ["http://localhost:3001"],
+    credentials: true,
+  })
+);
 
 app.use("/auth", authRouter);
 app.use("/blog", blogRouter);
