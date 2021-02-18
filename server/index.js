@@ -4,7 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const authRouter = require("./routes/auth");
+const authRouter = require("./routes/auth-route");
+const blogRouter = require("./routes/blog-route");
 
 dotenv.config();
 
@@ -27,3 +28,4 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/auth", authRouter);
+app.use("/blog", blogRouter);
