@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Register from "./components/auth/register/register";
 import Header from "./components/layout/header";
 
 function Router() {
@@ -11,7 +12,7 @@ function Router() {
           <div>Home</div>
         </Route>
         <Route path="/register">
-          <div>Register</div>
+          <Register />
         </Route>
         <Route path="/login">
           <div>Login</div>
