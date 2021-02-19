@@ -2,21 +2,19 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-const Register = (props) => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  async function register(e) {
+  async function login(e) {
     e.preventDefault();
     try {
-      const registerData = {
+      const loginData = {
         email,
         password,
-        confirmPassword,
       };
 
-      await axios.post("http://localhost:3000/auth/", registerData);
+      await axios.post("http://localhost:3000/auth/login", loginData);
     } catch (err) {
       console.error(err);
     }
@@ -24,9 +22,9 @@ const Register = (props) => {
 
   return (
     <div className="container">
-      <h1>Register your account!</h1>
+      <h1>Login your account!</h1>
       <br />
-      <Form onSubmit={register}>
+      <Form onSubmit={login}>
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input
@@ -49,21 +47,10 @@ const Register = (props) => {
             value={password}
           />
         </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            placeholder="password placeholder"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            value={confirmPassword}
-          />
-        </FormGroup>
-        <Button type="submit">Register</Button>
+        <Button type="submit">Login</Button>
       </Form>
     </div>
   );
 };
 
-export default Register;
+export default Login;
