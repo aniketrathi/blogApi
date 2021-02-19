@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 
 import AuthContext from "../../context/auth-context";
+import Logout from "../auth/logout/logout";
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,15 @@ const Header = (props) => {
             )}
           </Nav>
         </Collapse>
+        {loggedIn === true && (
+          <>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <Logout />
+              </NavItem>
+            </Nav>
+          </>
+        )}
       </Navbar>
     </div>
   );
