@@ -35,7 +35,7 @@ router.post(
   }
 );
 
-router.get("/", auth.auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find().populate("author");
     const comments = await Comment.find().populate("author");
