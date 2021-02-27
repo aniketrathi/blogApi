@@ -19,7 +19,7 @@ const Login = (props) => {
         email,
         password,
       };
-
+      
       await axios.post("http://localhost:3000/auth/login", loginData);
       await getLoggedIn();
       history.push("/");

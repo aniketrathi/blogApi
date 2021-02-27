@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
+import Blog from "./components/home/homes";
 import Header from "./components/layout/header";
 import AuthContext from "./context/auth-context";
 
@@ -13,7 +14,7 @@ function Router() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <div>Home</div>
+          <Blog />
         </Route>
         {loggedIn === false && (
           <>
