@@ -7,11 +7,15 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
+import AuthContext from "../../context/auth-context";
 import BlogContext from "../../context/blog-context";
 
 const Blog = () => {
   const { blogs } = useContext(BlogContext);
+  const { loggedIn } = useContext(AuthContext);
+
   const renderBlogs = () => {
     return blogs.map((blog, i) => {
       return (
@@ -23,6 +27,7 @@ const Blog = () => {
             </CardSubtitle>
             <CardText>{blog.description}</CardText>
           </CardBody>
+          <Link to={`/${blog._id}`}>View More</Link>
         </Card>
       );
     });
