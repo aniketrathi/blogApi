@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Card,
   CardTitle,
@@ -9,20 +11,29 @@ import {
   CardFooter,
 } from "reactstrap";
 
-import BlogContext from "../../context/blog-context";
+const BlogDetail = () => {
+  const { id } = useParams();
 
-const BlogDetail = ({ blog }) => {
-  const { comments } = useContext(BlogContext);
+  const [blog, setBlog] = useState({});
+  const [comments, setComments] = useState([]);
+
+  async function blogWithComments() {
+    const blogRes = await axios.get(`http://localhost:3000/blog/${id}`);
+    setBlog(blogRes.data.blog);
+    setComments(blogRes.data.comments);
+  }
+
+  useEffect(() => {
+    blogWithComments();
+  }, []);
 
   const renderComments = () => {
     comments.map((comment, i) => {
-      if (comment.blog.toString() === blog._id.toString()) {
-        return (
-          <CardText key={i}>
-            {comment.description} by {comment.author.email}
-          </CardText>
-        );
-      }
+      return (
+        <CardText key={i}>
+          {comment.description} by {comment.author.email}
+        </CardText>
+      );
     });
   };
 

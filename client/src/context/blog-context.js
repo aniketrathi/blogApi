@@ -5,14 +5,11 @@ const BlogContext = createContext();
 
 function BlogContextProvider(props) {
   const [blogs, setBlog] = useState([]);
-  const [comments, setComment] = useState([]);
 
   async function getBlog() {
     const blogRes = await axios.get("http://localhost:3000/blog");
 
-    setBlog(blogRes.data.blogs);
-
-    setComment(blogRes.data.comments);
+    setBlog(blogRes.data);
   }
 
   useEffect(() => {
@@ -20,7 +17,7 @@ function BlogContextProvider(props) {
   }, []);
 
   return (
-    <BlogContext.Provider value={{ blogs, getBlog, comments }}>
+    <BlogContext.Provider value={{ blogs, getBlog }}>
       {props.children}
     </BlogContext.Provider>
   );
