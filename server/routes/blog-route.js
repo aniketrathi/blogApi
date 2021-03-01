@@ -38,8 +38,19 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find().populate("author");
-    const comments = await Comment.find().populate("author");
-    res.json({ blogs, comments });
+    res.json(blogs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send();
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blog.findById(id).populate("author");
+    const comments = await Comment.find({ blog: id }).populate("author");
+    res.json({ blog, comments });
   } catch (err) {
     console.error(err);
     res.status(500).send();
