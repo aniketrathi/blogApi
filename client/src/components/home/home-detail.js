@@ -8,7 +8,6 @@ import {
   CardDeck,
   CardSubtitle,
   CardBody,
-  CardFooter,
 } from "reactstrap";
 
 const BlogDetail = () => {
@@ -19,19 +18,22 @@ const BlogDetail = () => {
 
   async function blogWithComments() {
     const blogRes = await axios.get(`http://localhost:3000/blog/${id}`);
-    setBlog(blogRes.data.blog);
-    setComments(blogRes.data.comments);
+    const { blog, comments } = blogRes.data;
+    setBlog(blog);
+    setComments(comments);
   }
 
-  useEffect(() => {
-    blogWithComments();
+  useEffect(async () => {
+    await blogWithComments();
+    console.log(blog.author);
   }, []);
 
   const renderComments = () => {
     comments.map((comment, i) => {
       return (
         <CardText key={i}>
-          {comment.description} by {comment.author.email}
+          {comment.description} by
+          {comment.author ? comment.author.email : undefined}
         </CardText>
       );
     });
@@ -43,10 +45,10 @@ const BlogDetail = () => {
         <CardBody>
           <CardTitle tag="h5">{blog.title}</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">
-            By {blog.author.email} At {blog.createdAt}
+            By {blog.author ? blog.author.email : undefined} At {blog.createdAt}
           </CardSubtitle>
           <CardText>{blog.description}</CardText>
-          <CardFooter>{renderComments()}</CardFooter>
+          {renderComments()}
         </CardBody>
       </Card>
     </CardDeck>

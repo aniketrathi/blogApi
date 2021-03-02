@@ -27,7 +27,7 @@ const Blog = () => {
             </CardSubtitle>
             <CardText>{blog.description}</CardText>
           </CardBody>
-          <Link to={`/blog/${blog._id}`}>View More</Link>
+          {loggedIn === true && <Link to={`/blog/${blog._id}`}>View More</Link>}
         </Card>
       );
     });
