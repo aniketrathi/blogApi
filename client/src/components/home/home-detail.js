@@ -25,7 +25,6 @@ const BlogDetail = () => {
 
   useEffect(async () => {
     await blogWithComments();
-    console.log(blog.author);
   }, []);
 
   const renderComments = () => {
