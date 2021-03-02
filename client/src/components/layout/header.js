@@ -1,4 +1,3 @@
-import React, { useState, useContext } from "react";
 import {
   Collapse,
   Navbar,
@@ -8,6 +7,7 @@ import {
   NavLink,
   NavItem,
 } from "reactstrap";
+import React, { useState, useContext } from "react";
 
 import AuthContext from "../../context/auth-context";
 import Logout from "../auth/logout/logout";

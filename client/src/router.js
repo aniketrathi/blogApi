@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
+import Blog from "./components/home/homes";
+import BlogDetail from "./components/home/home-detail";
+import Header from "./components/layout/header";
 import Login from "./components/auth/login/login";
 import Register from "./components/auth/register/register";
-import BlogDetail from "./components/home/home-detail";
-import Blog from "./components/home/homes";
-import Header from "./components/layout/header";
-
-// const BlogWithId = ({match}) => {
-//   return <BlogDetail blogid = {match.params.id} />
-// }
 
 function Router() {
   return (

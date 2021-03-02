@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import AuthContext from "../../../context/auth-context";
 
@@ -19,7 +19,7 @@ const Login = (props) => {
         email,
         password,
       };
-      
+
       await axios.post("http://localhost:3000/auth/login", loginData);
       await getLoggedIn();
       history.push("/");

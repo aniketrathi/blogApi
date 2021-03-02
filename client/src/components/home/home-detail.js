@@ -1,6 +1,4 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
   Card,
   CardTitle,
@@ -9,6 +7,8 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const BlogDetail = () => {
   const { id } = useParams();
